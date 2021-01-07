@@ -1,4 +1,11 @@
-﻿#ifndef _DEVIATIONCALCULATOR_H_
+﻿/**
+* @file deviationCalculator.h
+* @brief Jyogiプロコン2020「偏差値を求めるプログラム」の計算機の定義
+* @author yukinissie
+* @date 2021年1月7日
+*/
+
+#ifndef _DEVIATIONCALCULATOR_H_
 #define _DEVIATIONCALCULATOR_H_
 #define MAX_STUDENT_NUMBER 128
 #define MAX_SUBJECT_NUMBER 16

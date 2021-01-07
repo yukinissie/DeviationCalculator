@@ -1,4 +1,11 @@
-﻿#include "deviationCalculator.h"
+﻿/**
+* @file deviationCalculator.cpp
+* @brief Jyogiプロコン2020「偏差値を求めるプログラム」の計算機の中身
+* @author yukinissie
+* @date 2021年1月7日
+*/
+
+#include "deviationCalculator.h"
 
 DeviationCalculator::DeviationCalculator()
 {
