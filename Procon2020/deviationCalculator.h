@@ -1,7 +1,9 @@
-#ifndef _DEVIATIONCALCULATOR_H_
+﻿#ifndef _DEVIATIONCALCULATOR_H_
 #define _DEVIATIONCALCULATOR_H_
-#define MAX_SUBJECT_NUMBER 50
-#define MAX_STUDENT_NUMBER 100
+#define MAX_STUDENT_NUMBER 128
+#define MAX_SUBJECT_NUMBER 16
+
+#define DEBUG false
 
 #include <iostream>
 using namespace std;
@@ -12,16 +14,21 @@ public:
 	DeviationCalculator();
 	~DeviationCalculator();
 
-	void InputData(DeviationCalculator *dc);
+	void InputData(DeviationCalculator* dc);
 	void InputStudentAndSubjectNumber();
-	void OutputStudentAndSubjectNumber();
 	void InputSubjects();
-	void OutputSubjects();
 	void InputAchievement();
+	void OutputStudentAndSubjectNumber();
+	void OutputSubjects();
 	void OutputAchievement();
-	void ShowDeviation(DeviationCalculator *dc);
-	void CalcAvg();
-	void ShowAvg();
+	void Calculation(DeviationCalculator* dc);
+	void CalculateAverage();
+	void CalculateStandardDeviation();
+	void CalculateDeviation();
+	void ShowResult(DeviationCalculator* dc);
+	void ShowDeviation();
+	void ShowAverage();
+	void ShowStandardDeviation();
 
 private:
 	int studentNumber;
@@ -32,12 +39,13 @@ private:
 		int max;
 		int min;
 		int center;
-		double average;
-		double deviation;
+		long double average;
+		long double standardDeviation;
 	} statisticsTable[MAX_SUBJECT_NUMBER];
 	struct _achievement_table {
 		string name;
-		int subjects[MAX_SUBJECT_NUMBER];
+		long double subjects[MAX_SUBJECT_NUMBER];
+		long double deviation[MAX_SUBJECT_NUMBER];
 	} achievementTable[MAX_STUDENT_NUMBER];
 };
 #endif // _DEVIATIONCALCULATOR_H_

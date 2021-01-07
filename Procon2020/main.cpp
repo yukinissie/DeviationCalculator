@@ -1,20 +1,18 @@
-/**
+ï»¿/**
 * @file main.cpp
-* @brief JyogiƒvƒƒRƒ“2020u•Î·’l‚ð‹‚ß‚éƒvƒƒOƒ‰ƒ€v
+* @brief Jyogiãƒ—ãƒ­ã‚³ãƒ³2020ã€Œåå·®å€¤ã‚’æ±‚ã‚ã‚‹ãƒ—ãƒ­ã‚°ãƒ©ãƒ ã€
 * @author yukinissie
-* @date 2021”N1ŒŽ7“ú
+* @date 2021å¹´1æœˆ7æ—¥
 */
 
 #include "main.h"
 
 int main(void) {
-	// •Î·’lŒvŽZ‹@‚ðƒCƒ“ƒXƒ^ƒ“ƒX‚Æ‚µ‚Ä—pˆÓB
 	DeviationCalculator *dc = new DeviationCalculator;
 	
-	// ƒf[ƒ^‚Ì“ü—ÍB
 	dc->InputData(dc);
-	// •Î·’l‚Ì•\Ž¦B
-	dc->ShowDeviation(dc);
+	dc->Calculation(dc);
+	dc->ShowResult(dc);
 
 	delete dc;
 	return 0;

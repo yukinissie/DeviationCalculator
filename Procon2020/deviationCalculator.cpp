@@ -1,4 +1,4 @@
-#include "deviationCalculator.h"
+ï»¿#include "deviationCalculator.h"
 
 DeviationCalculator::DeviationCalculator()
 {
@@ -6,8 +6,10 @@ DeviationCalculator::DeviationCalculator()
 	this->subjectNumber = 0;
 	for (int i = 0; i < MAX_SUBJECT_NUMBER; i++) this->subjects[i] = "";
 	for (int j = 0; j < MAX_STUDENT_NUMBER; j++) {
-		for (int i = 0; i < MAX_SUBJECT_NUMBER; i++)
-			this->achievementTable[j].subjects[i] = 0;
+		for (int i = 0; i < MAX_SUBJECT_NUMBER; i++) {
+			this->achievementTable[j].subjects[i] = 0.0;
+			this->achievementTable[j].deviation[i] = 0.0;
+		}
 	}
 }
 
@@ -17,72 +19,69 @@ DeviationCalculator::~DeviationCalculator()
 
 void DeviationCalculator::InputData(DeviationCalculator *dc)
 {
-	// ¶“k”‚Æ‰È–Ú”‚ð“ü—ÍB
 	dc->InputStudentAndSubjectNumber();
-	// ¶“k”‚Æ‰È–Ú”‚ðo—ÍBiƒfƒoƒbƒO—pj
-	dc->OutputStudentAndSubjectNumber(); // TODO: íœ‚·‚éB
-	// ‰È–Ú‚ð‰È–Ú”•ª“ü—ÍB
 	dc->InputSubjects();
-	// ‰È–Ú‚ð‰È–Ú”•ªo—ÍBiƒfƒoƒbƒO—pj
-	dc->OutputSubjects(); // TODO: íœ‚·‚éB
-	// ¬Ñ‚ð¶“k”•ª“ü—ÍB
 	dc->InputAchievement();
-	// ¬Ñ‚ð¶“k”•ªo—ÍBiƒfƒoƒbƒO—pj
-	dc->OutputAchievement(); // TODO: íœ‚·‚éB
+
+	if (DEBUG) {
+		dc->OutputStudentAndSubjectNumber();
+		dc->OutputSubjects();
+		dc->OutputAchievement();
+	}
 }
 
 void DeviationCalculator::InputStudentAndSubjectNumber() {
-	cout << "l”‚Æ‰È–Ú”‚Ì“ü—ÍB—áj3 2" << endl;
+	cout << "äººæ•°ã¨ç§‘ç›®æ•°ã®å…¥åŠ›ã€‚ä¾‹ï¼‰3 2" << endl;
 	this->Caution();
 	cin >> this->studentNumber >> this->subjectNumber;
 }
-void DeviationCalculator::OutputStudentAndSubjectNumber() {
-	cout << "l”F" << this->studentNumber << endl
-		<< "‰È–Ú”F" << this->subjectNumber << endl;
-}
-
 void DeviationCalculator::InputSubjects()
 {
-	cout << "‰È–Ú‚ð‰È–Ú”•ª“ü—ÍB—áj‰pŒê ”Šw" << endl;
+	cout << "ç§‘ç›®ã‚’ç§‘ç›®æ•°åˆ†å…¥åŠ›ã€‚ä¾‹ï¼‰è‹±èªž æ•°å­¦" << endl;
 	this->Caution();
 	for (int i = 0; i < this->subjectNumber; i++) cin >> this->subjects[i];
 }
-
-void DeviationCalculator::OutputSubjects()
-{
-	for (int i = 0; i < this->subjectNumber; i++) cout << this->subjects[i] << endl;
-}
-
 void DeviationCalculator::InputAchievement()
 {
-	cout << "¬Ñ‚ð¶“k”•ª“ü—ÍB—áj”ÂèŠôŽŸ 34 40\\n _œ¨ˆ¤”V• 100 55\\n ”ü•ä”É 24 78\\n" << endl;
+	cout << "æˆç¸¾ã‚’ç”Ÿå¾’æ•°åˆ†å…¥åŠ›ã€‚ä¾‹ï¼‰æ¿å´Žå¹¾æ¬¡ 34 40\\n ç¥žæƒ æ„›ä¹‹åŠ© 100 55\\n ç¾Žç©‚ç¹ 24 78\\n" << endl;
 	this->Caution();
 	for (int i = 0; i < this->studentNumber; i++) {
 		cin >> this->achievementTable[i].name;
 		for (int j = 0; j < this->subjectNumber; j++) cin >> this->achievementTable[i].subjects[j];
 	}
 }
+void DeviationCalculator::Caution()
+{
+	cout << "æ³¨æ„ï¼šåŠè§’ã‚¹ãƒšãƒ¼ã‚¹ã§åŒºåˆ‡ã£ã¦ãã ã•ã„ï¼" << endl;
+}
 
+void DeviationCalculator::OutputStudentAndSubjectNumber() {
+	cout << "äººæ•°ï¼š" << this->studentNumber << endl
+		<< "ç§‘ç›®æ•°ï¼š" << this->subjectNumber << endl;
+}
+void DeviationCalculator::OutputSubjects()
+{
+	for (int i = 0; i < this->subjectNumber; i++) cout << this->subjects[i] << endl;
+}
 void DeviationCalculator::OutputAchievement()
 {
 	for (int i = 0; i < this->studentNumber; i++) {
-		cout << "¶“k" << i << "F" << this->achievementTable[i].name << endl;
+		cout << "ç”Ÿå¾’" << i << "ï¼š" << this->achievementTable[i].name << endl;
 		for (int j = 0; j < this->subjectNumber; j++)
-			cout << "‰È–Ú" << j << "F" << this->achievementTable[i].subjects[j] << endl;
+			cout << "ç§‘ç›®" << j << "ï¼š" << this->achievementTable[i].subjects[j] << endl;
 	}
 }
 
-void DeviationCalculator::ShowDeviation(DeviationCalculator *dc)
+void DeviationCalculator::Calculation(DeviationCalculator* dc)
 {
-	dc->CalcAvg();
-	dc->ShowAvg();
-
-	// TODO: •W€•Î·‚ð‹‚ßA•Î·’l‚ðo‚·B
+	dc->CalculateAverage();
+	dc->CalculateStandardDeviation();
+	dc->CalculateDeviation();
 }
 
-void DeviationCalculator::CalcAvg()
+void DeviationCalculator::CalculateAverage()
 {
-	double sum[MAX_SUBJECT_NUMBER];
+	long double sum[MAX_SUBJECT_NUMBER];
 	for (int i = 0; i < MAX_SUBJECT_NUMBER; i++) sum[i] = 0;
 
 	for (int j = 0; j < this->subjectNumber; j++) {
@@ -92,15 +91,56 @@ void DeviationCalculator::CalcAvg()
 		this->statisticsTable[j].average = sum[j] / this->studentNumber;
 	}
 }
-
-void DeviationCalculator::ShowAvg()
+void DeviationCalculator::CalculateStandardDeviation()
 {
-	for (int i = 0; i < this->subjectNumber; i++) {
-		cout << this->statisticsTable[i].average << endl;
+	long double sum[MAX_SUBJECT_NUMBER];
+	for (int i = 0; i < MAX_SUBJECT_NUMBER; i++) sum[i] = 0;
+
+	for (int j = 0; j < this->subjectNumber; j++) {
+		for (int i = 0; i < this->studentNumber; i++) {
+			sum[j] += powl(this->achievementTable[i].subjects[j] - this->statisticsTable[j].average, 2.0);
+		}
+		this->statisticsTable[j].standardDeviation = sqrtl(sum[j] / this->studentNumber);
+	}
+}
+void DeviationCalculator::CalculateDeviation()
+{
+	for (int j = 0; j < this->subjectNumber; j++) {
+		for (int i = 0; i < this->studentNumber; i++) {
+			this->achievementTable[i].deviation[j] = ((this->achievementTable[i].subjects[j] - this->statisticsTable[j].average) / this->statisticsTable[j].standardDeviation) * 10 + 50;
+		}
 	}
 }
 
-void DeviationCalculator::Caution()
+void DeviationCalculator::ShowResult(DeviationCalculator* dc)
 {
-	cout << "’ˆÓF”¼ŠpƒXƒy[ƒX‚Å‹æØ‚Á‚Ä‚­‚¾‚³‚¢I" << endl;
+	dc->ShowAverage();
+	dc->ShowStandardDeviation();
+	dc->ShowDeviation();
+}
+
+void DeviationCalculator::ShowAverage()
+{
+	cout << "------å¹³å‡å€¤------" << endl;
+	for (int i = 0; i < this->subjectNumber; i++) {
+		cout << this->subjects[i] << "ï¼š" << this->statisticsTable[i].average << endl;
+	}
+}
+void DeviationCalculator::ShowStandardDeviation()
+{
+	cout << "------æ¨™æº–åå·®------" << endl;
+	for (int i = 0; i < this->subjectNumber; i++) {
+		cout << this->subjects[i] << "ï¼š" << this->statisticsTable[i].standardDeviation << endl;
+	}
+}
+void DeviationCalculator::ShowDeviation()
+{
+	cout << "------åå·®å€¤------" << endl;
+	for (int i = 0; i < this->studentNumber; i++) {
+		cout << this->achievementTable[i].name << endl;
+		for (int j = 0; j < this->subjectNumber; j++) {
+			cout << this->subjects[j] << "ï¼š" <<  this->achievementTable[i].deviation[j] << endl;
+		}
+		cout << "------------------" << endl;
+	}
 }
