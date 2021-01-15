@@ -21,38 +21,36 @@ public:
 	DeviationCalculator();
 	~DeviationCalculator();
 
-	void InputData(DeviationCalculator* dc);
+	void InputData();
+	void Calculation();
+	void ShowResult();
+
+private:
 	void InputStudentAndSubjectNumber();
 	void InputSubjects();
 	void InputAchievement();
-	void OutputStudentAndSubjectNumber();
-	void OutputSubjects();
-	void OutputAchievement();
-	void Calculation(DeviationCalculator* dc);
+	void OutputStudentAndSubjectNumber() const;
+	void OutputSubjects() const;
+	void OutputAchievement() const;
 	void CalculateAverage();
 	void CalculateStandardDeviation();
 	void CalculateDeviation();
-	void ShowResult(DeviationCalculator* dc);
-	void ShowDeviation();
-	void ShowAverage();
-	void ShowStandardDeviation();
+	void ShowDeviation() const;
+	void ShowAverage() const;
+	void ShowStandardDeviation() const;
+	static void Caution();
 
-private:
-	int studentNumber;
-	int subjectNumber;
-	string subjects[MAX_SUBJECT_NUMBER];
-	void Caution();
+	int studentNumber = 0;
+	int subjectNumber = 0;
+	string subjects[MAX_SUBJECT_NUMBER] = { "" };
 	struct _statistics_table {
-		int max;
-		int min;
-		int center;
-		long double average;
-		long double standardDeviation;
+		long double average = 0.0;
+		long double standardDeviation = 0.0;
 	} statisticsTable[MAX_SUBJECT_NUMBER];
 	struct _achievement_table {
-		string name;
-		long double subjects[MAX_SUBJECT_NUMBER];
-		long double deviation[MAX_SUBJECT_NUMBER];
+		string name = "";
+		long double subjects[MAX_SUBJECT_NUMBER] = { 0.0 };
+		long double deviation[MAX_SUBJECT_NUMBER] = { 0.0 };
 	} achievementTable[MAX_STUDENT_NUMBER];
 };
 #endif // _DEVIATIONCALCULATOR_H_

@@ -5,14 +5,14 @@
 * @date 2021年1月7日
 */
 
-#include "main.h"
+#include "deviationCalculator.h"
 
 int main(void) {
 	DeviationCalculator *dc = new DeviationCalculator;
 	
-	dc->InputData(dc);
-	dc->Calculation(dc);
-	dc->ShowResult(dc);
+	dc->InputData();
+	dc->Calculation();
+	dc->ShowResult();
 
 	delete dc;
 	return 0;
